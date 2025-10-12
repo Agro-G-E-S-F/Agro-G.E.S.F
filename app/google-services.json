@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "179645918923",
+    "project_id": "agrogesf-9dafc",
+    "storage_bucket": "agrogesf-9dafc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:179645918923:android:7f54c94833b7e3175bb54e",
+        "android_client_info": {
+          "package_name": "com.example.agrogesf"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhDk9QJz7TQy6JvYSwBJp8DkPog5N1cqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

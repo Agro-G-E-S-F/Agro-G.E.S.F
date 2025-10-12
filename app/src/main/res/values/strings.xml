@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AGRO G.E.S.F</string>
+
+    <!-- Auth -->
+    <string name="login">Login</string>
+    <string name="cadastro">Cadastro</string>
+    <string name="name">Nome:</string>
+    <string name="email">Email:</string>
+    <string name="password">Senha:</string>
+    <string name="confirm_password">Repetir senha:</string>
+    <string name="btn_login">ENTRAR</string>
+    <string name="btn_register">CADASTRAR</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_glossary">Glossário</string>
+    <string name="nav_gps">GPS</string>
+    <string name="nav_settings">Configurações</string>
+
+    <!-- Home -->
+    <string name="see_more">Ver mais sobre</string>
+    <string name="no_data_loaded">Nenhum dado carregado</string>
+    <string name="connect_to_wifi">Conecte-se ao WiFi AGRO_GESF_DATA para receber informações</string>
+
+    <!-- Glossary -->
+    <string name="praga">Praga</string>
+    <string name="doenca">Doença</string>
+    <string name="pragas">Pragas</string>
+    <string name="doencas">Doenças</string>
+
+    <!-- Pest Detail -->
+    <string name="false_alarm">ALARME FALSO</string>
+    <string name="pest_detected">PRAGA</string>
+    <string name="detection_recorded">Detecção Registrada!</string>
+    <string name="detection_success_message">A detecção foi registrada com sucesso.</string>
+
+    <!-- GPS -->
+    <string name="gps">GPS</string>
+    <string name="coordinates">Coordenadas</string>
+    <string name="obtaining_location">Obtendo localização…</string>
+    <string name="location_permission_required">Permissão de localização necessária</string>
+    <string name="location_permission_message">Para usar o GPS, precisamos acessar sua localização</string>
+    <string name="allow_access">Permitir acesso</string>
+
+    <!-- Settings -->
+    <string name="settings">Configurações</string>
+    <string name="sync_data">Sincronizar dados</string>
+    <string name="last_sync">Última sync:</string>
+    <string name="never_synced">Nunca sincronizado</string>
+    <string name="data_synced">Dados sincronizados!</string>
+    <string name="about_app">Sobre o Aplicativo</string>
+    <string name="version">Versão</string>
+    <string name="logout">Sair da Conta</string>
+    <string name="logout_confirmation">Tem certeza que deseja sair?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="cancel">Cancelar</string>
+
+    <!-- Transfer Status -->
+    <string name="connecting">Conectando…</string>
+    <string name="transferring">Transferindo dados…</string>
+    <string name="transfer_complete">Transferência concluída!</string>
+    <string name="items_received">%d itens recebidos</string>
+    <string name="transfer_error">Erro na transferência</string>
+
+    <!-- Errors -->
+    <string name="error_empty_field">Este campo não pode estar vazio</string>
+    <string name="error_invalid_email">Email inválido</string>
+    <string name="error_password_short">Senha deve ter no mínimo 6 caracteres</string>
+    <string name="error_passwords_dont_match">As senhas não coincidem</string>
+    <string name="error_email_exists">Email já cadastrado</string>
+    <string name="error_wrong_credentials">Email ou senha incorretos</string>
+    <string name="error_no_internet">Sem conexão com a internet</string>
+</resources>

@@ -1,0 +1,15 @@
+# gradle/libs.versions.toml
+
+[versions]
+androidGradlePlugin = "8.2.0"
+kotlinAndroid = "1.9.20"
+googleServices = "4.4.0"
+ksp = "1.9.20-1.0.14"
+kotlinComposeCompiler = "1.5.4"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroid" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlinComposeCompiler" }

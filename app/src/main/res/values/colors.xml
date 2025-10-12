@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors -->
+    <color name="green_primary">#6B8E5C</color>
+    <color name="green_dark">#4A6342</color>
+    <color name="green_light">#8FAE7E</color>
+
+    <!-- Secondary Colors -->
+    <color name="yellow_accent">#D4C55A</color>
+    <color name="yellow_light">#E5D97B</color>
+
+    <!-- Background Colors -->
+    <color name="background_light">#F5F5F0</color>
+    <color name="background_card">#FFFFFF</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#2C3E2C</color>
+    <color name="text_secondary">#5C6E5C</color>
+    <color name="text_on_primary">#FFFFFF</color>
+
+    <!-- Card Colors -->
+    <color name="card_pragues">#5B7FA8</color>
+    <color name="card_disease">#5B7FA8</color>
+    <color name="card_gold">#A89558</color>
+
+    <!-- Status Colors -->
+    <color name="error_red">#D32F2F</color>
+    <color name="success_green">#4CAF50</color>
+
+    <!-- Default -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
+

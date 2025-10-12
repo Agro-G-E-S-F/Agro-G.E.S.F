@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Exclude Firebase token files -->
+    <exclude domain="sharedpref" path="FirebaseAppDataStore" />
+    <exclude domain="sharedpref" path="com.google.firebase.auth" />
+</full-backup-content>
