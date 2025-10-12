@@ -1,0 +1,54 @@
+{
+  "timestamp": "2025-09-01T01:07:30.885982",
+  "data_directory": "/home/crazy-cat/Documentos/Agro-GESF/data",
+  "splits": {
+    "train": {
+      "path": "/home/crazy-cat/Documentos/Agro-GESF/data/train",
+      "classes": [
+        "Acaro",
+        "Doenca_Bacteriana",
+        "Doencas_Virais",
+        "Ferrugem",
+        "Lagarta",
+        "Pinta_Preta",
+        "Requeima",
+        "Saudavel",
+        "oidio"
+      ],
+      "class_to_idx": {
+        "Acaro": 0,
+        "Doenca_Bacteriana": 1,
+        "Doencas_Virais": 2,
+        "Ferrugem": 3,
+        "Lagarta": 4,
+        "Pinta_Preta": 5,
+        "Requeima": 6,
+        "Saudavel": 7,
+        "oidio": 8
+      },
+      "idx_to_class": {
+        "0": "Acaro",
+        "1": "Doenca_Bacteriana",
+        "2": "Doencas_Virais",
+        "3": "Ferrugem",
+        "4": "Lagarta",
+        "5": "Pinta_Preta",
+        "6": "Requeima",
+        "7": "Saudavel",
+        "8": "oidio"
+      },
+      "class_counts": {
+        "Acaro": 773,
+        "Doenca_Bacteriana": 5234,
+        "Doencas_Virais": 3216,
+        "Ferrugem": 1120,
+        "Lagarta": 1716,
+        "Pinta_Preta": 3504,
+        "Requeima": 2736,
+        "Saudavel": 7720,
+        "oidio": 1607
+      },
+      "total_samples": 27626
+    }
+  }
+}
