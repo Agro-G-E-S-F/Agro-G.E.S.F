@@ -1,6 +1,8 @@
 import cv2 as cv
 import time
-
+import numpy as np
+from PIL import Image
+from plantcv import plantcv as pcv
 vid = cv.VideoCapture(0)
 count = 0
 
@@ -35,3 +37,24 @@ class utils:
             #index_org
             ...
         ##Terminar o código para salvar as infos das pragas e doenças e o caminho da imagem no dicionário infos_org
+
+    def preProcessImage(self,img_path):
+
+        img, path, filename = pcv.readimage("teste.png")
+
+        # Converte para escala de cinza do canal 'a' do LAB (separa verde de magenta)
+        a = pcv.rgb2gray_lab(img, 'a')
+
+        # Faz um threshold no canal 'a' para separar verde (folha) do fundo
+        mask = pcv.threshold.binary(a, threshold=115, max_value=255, object_type='light')
+
+        # Remove pequenos ruídos e buracos
+        mask = pcv.fill(mask, size=200)
+
+        # Aplica a máscara à imagem original
+        result = pcv.apply_mask(img, mask, mask_color='black')
+
+        # Mostra a imagem segmentada
+        cv.imshow("Segmentada", result)
+        cv.waitKey(0)
+        cv.destroyAllWindows()
