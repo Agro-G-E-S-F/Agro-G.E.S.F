@@ -7,6 +7,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from SobreNos import abrir_sobre_nos
 from Cor_Imgs import cores, caminho_imgs
 
+
 def centralizar_janela(window, width, height):
     screen_w = window.winfo_screenwidth()
     screen_h = window.winfo_screenheight()
@@ -140,7 +141,9 @@ def Abrir_Grafico_Praga():
         text="", width=40,
         height=40, 
         fg_color="transparent",
-        hover_color=cores['branco'])
+        hover_color=cores['branco'],
+        command= lambda: [grafico_win.destroy(),__import__("Glossario").abrir_glossario()]
+        )
     Glosso_buttom.pack(side="left", expand=True, padx=50, pady=10)
     
     Config_buttom = ctk.CTkButton(

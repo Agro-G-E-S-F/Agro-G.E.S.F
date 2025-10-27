@@ -5,6 +5,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 from SobreNos import abrir_sobre_nos
 from Grafico_Pragas import Abrir_Grafico_Praga
+from Glossario import abrir_glossario
 from Cor_Imgs import cores, caminho_imgs
 
 
@@ -297,7 +298,9 @@ def Abrir_Perfil(grafico_win=None):
         width=40,
         height=40,
         fg_color="transparent",
-        hover_color=cores['branco'])
+        hover_color=cores['branco'],
+        command= lambda: [Janela_Pefil_win.destroy(), abrir_glossario()]
+        )
     Glosso_buttom.pack(side="left", expand=True, padx=50, pady=10)
 
     Config_buttom = ctk.CTkButton(

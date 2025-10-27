@@ -19,8 +19,11 @@ cores = {
     'preto': "#000000",
     'Fundo_Menu': "#a4c639",
     'Fundo_azul': "#4A6FA5",
+    'fundo_azul_glosario': "#6B9AA4",
     'Borda_Frame': "#E0E556",
-    'cor_texto': "#22532C"
+    'cor_texto': "#22532C",
+    'cor_glossario_titulo': "#ADA339",
+    'cor_borda_titulo_glossario': "#366C0C"
 }
 
 caminho_imgs = {
@@ -43,9 +46,9 @@ caminho_imgs = {
     'Seta_dash_esquerda': BASE_DIR/ "Imgs/visu_element/Seta_esquerda.png",
     'Perfil_default': BASE_DIR/ "Imgs/visu_element/Teste_Img2.png",
     'Perfil_button': BASE_DIR/ "Imgs/visu_element/Alterar_perfil_button.png",
+    'Logo_praga_glossario': BASE_DIR/ "Imgs/visu_element/Logo_doença.png",
+    'Logo_doença_glossario': BASE_DIR/ "Imgs/visu_element/Logo_praga.png",
 
-    
-    
     #imagens de exemplo para o dashboard(tirar elas depois)
     'exemplo_folha': BASE_DIR/ "Imgs/visu_element/exemplo_folha.jpeg",
     'exemplo_folha2': BASE_DIR/ "Imgs/visu_element/exemplo_folha2.jpg",

@@ -5,7 +5,6 @@ from Cor_Imgs import cores, caminho_imgs
 from SobreNos import abrir_sobre_nos
 from Grafico_Pragas import Abrir_Grafico_Praga
 
-
 # centralizar janelas
 def centralizar_janela(window, width, height):
     screen_w = window.winfo_screenwidth()
@@ -143,7 +142,6 @@ def mostrar_anterior():
     if fotos_detectadas:
         foto_index = (foto_index - 1) % len(fotos_detectadas)
         exibir_foto_praga(fotos_detectadas[foto_index])
-# -------------------------------------------------------------------
 
 
 def main():
@@ -292,7 +290,9 @@ def main():
         width=40,
         height=40, 
         fg_color="transparent", 
-        hover_color=cores['branco'])
+        hover_color=cores['branco'],
+        command= lambda: [dashBoard.destroy(), __import__("Glossario").abrir_glossario()]
+        )
     Glosso_buttom.pack(side="left", expand=True, padx=50, pady=10)
     
     Config_buttom = ctk.CTkButton(
@@ -332,7 +332,7 @@ def main():
     # Criar o frame da foto + descrição
     criar_frame_foto(dashBoard)
 
-    # Fotos detectadas
+    # Fotos detectadas -- trocar para a detecção, isso é apenas uma simulação
     global fotos_detectadas
     fotos_detectadas = [
         caminho_imgs['exemplo_folha'],

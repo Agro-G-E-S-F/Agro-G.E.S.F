@@ -66,7 +66,7 @@ def main():
     
     def abrir_dashboard():
         nome = entrada_nome_login.get()
-        senha = entrada_senha_login;get()
+        senha = entrada_senha_login.get()
 
         if not nome or not senha:
             #Trocar por ctk
