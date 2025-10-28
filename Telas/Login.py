@@ -3,9 +3,10 @@ from PIL import Image
 import customtkinter as ctk
 from Cor_Imgs import cores, caminho_imgs
 import Dashboard
-from Data.database import  cadastrarUsuario, tentarLogin,createTables
-
-
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from Data.database import cadastrarUsuario, tentarLogin,createTables 
 # Funções Utilitárias
 
 # centrailizar janelas 
@@ -63,26 +64,13 @@ def main():
     centralizar_janela(janela, 1200, 700)
     janela.configure(fg_color=cores['cor_fundo'])
     
-    
-    def abrir_dashboard():
-        nome = entrada_nome_login.get()
-        senha = entrada_senha_login.get()
-
-        if not nome or not senha:
-            #Trocar por ctk
-            print("Preencha todos os campos")
-            return
-        
-        def sucesso():
-            janela.destroy() 
-            Dashboard.main()   # abre dashboard
-    tentarLogin(nome,senha,on_sucess=sucesso)
+   
     if Path(caminho_imgs['icon']).is_file():janela.iconbitmap(caminho_imgs['icon'])
     def realizar_cadastro():
         nome = entrada_nome_cad.get()
         email = entrada_email_cad.get()
         senha = entrada_senha_cad.get()
-        rep_senha = entrada_nep_senha.get()
+        rep_senha = entrada_rep_senha_cad.get()
     
         if not nome or not email or not senha or not rep_senha:
             print("Preencha todos os campos") #---> Colocar em CTK
@@ -169,6 +157,23 @@ def main():
 
     entrada_nome_login = criar_campo_com_imagem(frame_login, "Nome   ", caminho_imgs['conta'], (35, 35))
     entrada_senha_login = criar_campo_com_imagem(frame_login, "Senha   ", caminho_imgs['senha'], (35, 35), show="*")
+
+    def abrir_dashboard():
+        nome = entrada_nome_login.get()
+        senha = entrada_senha_login.get()
+        if not nome or not senha:
+            #Trocar por ctk
+            print("Preencha todos os campos")
+            return
+        sucesso()
+        
+    def sucesso():
+        janela.destroy() 
+        Dashboard.main()  
+
+    nome = entrada_nome_login.get()
+    senha = entrada_senha_login.get()
+    tentarLogin(nome,senha,on_sucess=sucesso)
 
     Login_Buttom = ctk.CTkButton(
         frame_login, 
