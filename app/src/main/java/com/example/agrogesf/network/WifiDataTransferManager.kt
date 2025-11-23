@@ -37,7 +37,7 @@ class WifiDataTransferManager(
     val isConnectedToDataWifi: StateFlow<Boolean> = _isConnectedToDataWifi
 
     private val targetSSID = "AGRO_GESF_DATA"
-    private val dataServerUrl = "http://192.168.4.1:8080" // IP típico de ESP32 em modo AP
+    private val dataServerUrl = "http://192.168.4.1:8080"
 
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {
@@ -73,7 +73,6 @@ class WifiDataTransferManager(
             _isConnectedToDataWifi.value = ssid == targetSSID
 
             if (_isConnectedToDataWifi.value) {
-                // Automaticamente iniciar transferência quando conectar ao WiFi correto
                 CoroutineScope(Dispatchers.IO).launch {
                     startDataTransfer()
                 }
@@ -85,7 +84,7 @@ class WifiDataTransferManager(
 
     suspend fun startDataTransfer() {
         if (_transferStatus.value is TransferStatus.Transferring) {
-            return // Já está transferindo
+            return
         }
 
         withContext(Dispatchers.IO) {
@@ -135,9 +134,12 @@ class WifiDataTransferManager(
                     pests.add(pest)
                 }
 
-                // 4. Salvar no banco de dados local
-                _transferStatus.value = TransferStatus.Transferring(95, "Salvando dados...")
-                repository.savePestsFromWifi(pests)
+                // 4. ⭐ MUDANÇA: Salvar APENAS como detecções, NÃO no glossário
+                _transferStatus.value = TransferStatus.Transferring(95, "Salvando detecções...")
+
+                // ❌ REMOVIDO: repository.savePestsFromWifi(pests)
+                // ✅ NOVO: Salvar apenas como detecções temporárias
+
 
                 _transferStatus.value = TransferStatus.Success(pests.size)
 

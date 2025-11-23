@@ -357,7 +357,7 @@ private fun EmptyMapState() {
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Conecte-se ao WiFi AGRO_GESF_DATA para receber o mapa de calor",
+                text = "Mapa não encontrado",
                 fontSize = 14.sp,
                 color = TextSecondary,
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center

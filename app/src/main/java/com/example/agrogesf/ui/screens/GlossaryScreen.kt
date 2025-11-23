@@ -45,7 +45,11 @@ fun GlossaryScreen(
     } else {
         viewModel.diseases.collectAsState()
     }
-
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(BackgroundLight)
+    ){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -59,9 +63,10 @@ fun GlossaryScreen(
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 modifier = Modifier
+                    .weight(1f)
                     .fillMaxSize()
                     .padding(horizontal = 16.dp),
-                contentPadding = PaddingValues(vertical = 16.dp),
+                contentPadding = PaddingValues(top = 16.dp, bottom = 80.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
@@ -77,11 +82,16 @@ fun GlossaryScreen(
         }
 
         // Botão para alternar entre Pragas e Doenças
+
+    }
         NavigationButton(
             pestType = pestType,
-            onClick = onNavigateToOtherType
+            onClick = onNavigateToOtherType,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(16.dp)
         )
-    }
+}
 }
 
 @Composable
@@ -244,13 +254,14 @@ private fun EmptyGlossaryState(pestType: PestType) {
 @Composable
 private fun NavigationButton(
     pestType: PestType,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .shadow(4.dp, RoundedCornerShape(16.dp))
+            .shadow(8.dp, RoundedCornerShape(16.dp))
             .clickable { onClick() },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
@@ -275,7 +286,7 @@ private fun NavigationButton(
                 painter = painterResource(id = R.drawable.ic_arrow_forward),
                 contentDescription = "Navegar",
                 tint = YellowAccent,
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier.size(32.dp)
             )
         }
     }

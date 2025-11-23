@@ -27,4 +27,9 @@ interface PestDao {
 
     @Query("DELETE FROM pests")
     suspend fun deleteAll()
+
+    @Query("SELECT COUNT(*) FROM pests")
+    suspend fun getPestCount(): Int
+
+
 }

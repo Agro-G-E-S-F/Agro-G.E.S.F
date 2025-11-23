@@ -1,0 +1,135 @@
+{
+  "Ferrugem": {
+    "nome": "Ferrugem",
+    "descricao": "A ferrugem asiática da soja (Phakopsora pachyrhizi) é uma das doenças mais destrutivas da cultura.\n\nCaracteriza-se pelo aparecimento de pequenas pústulas de coloração marrom-avermelhada na face inferior das folhas. Em casos severos, causa desfolha precoce, reduzindo drasticamente a produtividade.\n\nO fungo se desenvolve em condições de alta umidade e temperaturas entre 18-28°C. Seus esporos são facilmente disseminados pelo vento.",
+    "metodo_controle": "Manejo da ferrugem:\n\n• Monitoramento constante desde o início do desenvolvimento\n• Aplicação preventiva de fungicidas\n• Uso de cultivares resistentes ou tolerantes\n• Rotação de princípios ativos para evitar resistência\n• Eliminação de plantas voluntárias (soja \"guaxa\")\n• Respeitar o vazio sanitário\n• Semeadura na época recomendada\n\nA aplicação preventiva é fundamental, pois após o estabelecimento da doença o controle é mais difícil.",
+    "imagem": "../imgs/doencas/ferrugem.png"
+  },
+  "Antracnose": {
+    "nome": "Antracnose",
+    "descricao": "A antracnose é causada por fungos do gênero Colletotrichum e afeta diversas culturas.\n\nManifesta-se através de manchas necróticas escuras nas folhas, caules e frutos. Em condições favoráveis (alta umidade e temperatura), pode causar sérios prejuízos, levando à queda prematura de folhas e frutos.\n\nO fungo sobrevive em restos culturais e sementes infectadas.",
+    "metodo_controle": "Controle da antracnose:\n\n• Uso de sementes certificadas e sadias\n• Tratamento de sementes com fungicidas\n• Rotação de culturas\n• Eliminação de restos culturais\n• Aplicação de fungicidas preventivos\n• Evitar irrigação por aspersão nas horas mais quentes\n• Manter espaçamento adequado entre plantas\n\nO manejo preventivo e cultural é essencial para evitar epidemias.",
+    "imagem": "../imgs/doencas/antracnose.png"
+  },
+  "Míldio": {
+    "nome": "Míldio",
+    "descricao": "O míldio é uma doença fúngica que ataca diversas culturas, causando manchas amareladas na face superior das folhas e crescimento de fungos brancos ou acinzentados na face inferior.\n\nÉ favorecido por alta umidade, orvalho prolongado e temperaturas amenas. Pode causar perdas significativas se não controlado adequadamente.\n\nOs esporos são disseminados pelo vento e respingos de água.",
+    "metodo_controle": "Controle do míldio:\n\n• Espaçamento adequado entre plantas\n• Evitar irrigação nas horas mais frias\n• Uso de cultivares resistentes\n• Aplicação preventiva de fungicidas\n• Remoção de folhas infectadas\n• Boa ventilação da cultura\n• Rotação de culturas\n\nO controle preventivo é essencial, pois a doença se desenvolve rapidamente em condições favoráveis.",
+    "imagem": "../imgs/doencas/mildio.png"
+  },
+  "Mancha-Foliar": {
+    "nome": "Mancha-Foliar",
+    "descricao": "As manchas foliares são causadas por diversos fungos e bactérias que atacam as folhas das plantas.\n\nCaracterizam-se por manchas de diferentes formatos, cores e tamanhos, dependendo do patógeno causador. Podem reduzir a área fotossintética e comprometer a produtividade.\n\nSão favorecidas por alta umidade e temperatura.",
+    "metodo_controle": "Manejo de manchas foliares:\n\n• Uso de sementes sadias\n• Rotação de culturas\n• Eliminação de restos culturais\n• Espaçamento adequado\n• Aplicação de fungicidas quando necessário\n• Nutrição equilibrada das plantas\n• Evitar ferimentos nas plantas\n\nO manejo integrado é a melhor estratégia de controle.",
+    "imagem": "../imgs/doencas/mancha_foliar.png"
+  },
+  "Podridão": {
+    "nome": "Podridão",
+    "descricao": "As podridões são causadas por diversos fungos e bactérias que atacam raízes, caules, frutos e órgãos de reserva.\n\nCaracterizam-se por apodrecimento dos tecidos, que se tornam moles, escurecidos e com odor desagradável. Podem causar murcha, tombamento e morte das plantas.\n\nSão favorecidas por excesso de umidade e ferimentos.",
+    "metodo_controle": "Controle de podridões:\n\n• Drenagem adequada do solo\n• Evitar excesso de irrigação\n• Rotação de culturas\n• Uso de material sadio para plantio\n• Evitar ferimentos nas plantas\n• Aplicação de fungicidas/bactericidas quando necessário\n• Remoção de plantas doentes\n\nO manejo preventivo e o controle da umidade são fundamentais.",
+    "imagem": "../imgs/doencas/podridao.png"
+  },
+  "Oídio": {
+    "nome": "Oídio",
+    "descricao": "O oídio é uma doença fúngica característica pelo crescimento esbranquiçado e pulverulento sobre as folhas, caules e frutos.\n\nDiferentemente de outras doenças, desenvolve-se em condições de baixa umidade relativa (50-70%) e temperaturas amenas a moderadas. Pode cobrir toda a superfície das folhas, reduzindo a fotossíntese.\n\nÉ facilmente disseminado pelo vento.",
+    "metodo_controle": "Controle do oídio:\n\n• Uso de cultivares resistentes\n• Aplicação preventiva de fungicidas\n• Enxofre é efetivo no controle\n• Evitar excesso de nitrogênio\n• Poda para melhorar ventilação\n• Eliminação de plantas muito infectadas\n• Rotação de princípios ativos\n\nO controle deve começar preventivamente, pois a doença se espalha rapidamente.",
+    "imagem": "../imgs/doencas/oidio.png"
+  },
+  "Crestamento Bacteriano": {
+    "nome": "Crestamento Bacteriano",
+    "descricao": "O Crestamento Bacteriano (ex: Xanthomonas spp.) é uma doença que geralmente se manifesta como lesões foliares necróticas, muitas vezes de aparência angular (delimitadas pelas nervuras) e aspecto encharcado (anasarca). Pode evoluir para a queima e queda das folhas, afetando também caules e vagens (em leguminosas). É favorecida por alta umidade e temperaturas moderadas a altas.",
+    "metodo_controle": "Controle do Crestamento Bacteriano:\n\n• Uso de sementes sadias e certificadas\n• Rotação de culturas (evitar plantios sucessivos da mesma espécie)\n• Incorporação de restos culturais\n• Evitar irrigação por aspersão (que dissemina a bactéria)\n• Aplicação preventiva de fungicidas cúpricos (como oxicloreto de cobre ou hidróxido de cobre).",
+    "imagem": "../Imgs/doencas/Bacterial_Blight.png"
+  },
+  "Esca da Videira": {
+    "nome": "Esca da Videira (Sarampo Preto)",
+    "descricao": "Também conhecida como Esca ou Apoplexia da videira, é uma doença complexa causada por um conjunto de fungos que degradam o lenho (madeira). Os sintomas nas folhas incluem manchas cloróticas (amareladas) entre as nervuras que depois necrosam, dando um aspecto de 'listras de tigre'. Nos frutos (uvas), podem aparecer pequenas manchas escuras, semelhantes a sarampo.",
+    "metodo_controle": "Controle da Esca da Videira:\n\n• Proteção de grandes feridas de poda com pastas fungicidas (evitar a entrada dos esporos)\n• Remoção e destruição de material infectado (poda sanitária)\n• Manutenção do vigor da planta.\n\nNão há controle químico curativo eficaz para os fungos do lenho.",
+    "imagem": "../Imgs/doencas/Black_Measles.png"
+  },
+  "Brusone": {
+    "nome": "Brusone",
+    "descricao": "A Brusone (causada por Pyricularia oryzae no arroz, ou espécies relacionadas em outros cereais) é uma das doenças fúngicas mais destrutivas. Nas folhas, causa lesões típicas em forma de diamante (losango), com centro cinza ou esbranquiçado e bordas marrons. Pode atacar o 'pescoço' da panícula (brusone do pescoço), impedindo o enchimento de grãos e causando grandes perdas.",
+    "metodo_controle": "Controle da Brusone:\n\n• Uso de cultivares resistentes\n• Tratamento de sementes\n• Manejo adequado da adubação nitrogenada (o excesso favorece a doença)\n• Aplicação de fungicidas sistêmicos e protetores em momentos críticos, como nas fases de emborrachamento e floração.",
+    "imagem": "../Imgs/doencas/Brusone.png"
+  },
+  "Mancha-de-Cercospora": {
+    "nome": "Mancha-de-Cercospora (Cercosporiose)",
+    "descricao": "Doença causada por fungos do gênero *Cercospora*. Os sintomas típicos são manchas foliares circulares ou irregulares, muitas vezes com **centro acinzentado ou claro** e bordas escuras (marrons ou arroxeadas). Essas lesões podem levar à desfolha precoce da planta, reduzindo significativamente a capacidade de fotossíntese.",
+    "metodo_controle": "Controle da Mancha-de-Cercospora:\n\n• Rotação de culturas\n• Eliminação de restos culturais\n• Uso de cultivares resistentes ou tolerantes\n• Aplicação de fungicidas (ex: triazóis, estrobilurinas, mancozebe) em condições de alta umidade e temperatura.",
+    "imagem": "../Imgs/doencas/Cercospora_Leaf_Blight.png"
+  },
+  "Vírus do Enrolamento da Folha": {
+    "nome": "Vírus do Enrolamento da Folha",
+    "descricao": "Refere-se a diversas viroses que causam o 'Enrolamento das Folhas' (ex: Cotton Leaf Curl Virus ou o Vírus do Enrolamento Amarelo). Os sintomas principais são o **enrolamento das margens das folhas** (geralmente para cima), espessamento e escurecimento das nervuras, e nanismo da planta. Causa redução drástica no crescimento e produção.",
+    "metodo_controle": "Controle do Vírus do Enrolamento da Folha:\n\n• Erradicação de plantas doentes (roguing)\n• Uso de mudas sadias\n• Controle rigoroso do inseto vetor (geralmente a mosca-branca, *Bemisia tabaci*)\n\nNão há cura para plantas infectadas.",
+    "imagem": "../Imgs/doencas/Curl_Virus.png"
+  },
+  "Pinta-Preta": {
+    "nome": "Pinta-Preta",
+    "descricao": "A Pinta-preta é causada por *Alternaria solani* e afeta principalmente plantas da família Solanácea (como tomate e batata). Caracteriza-se por lesões foliares escuras e necróticas que possuem **anéis concêntricos**, dando a aparência de um 'alvo'. Geralmente, manifesta-se primeiro nas folhas mais velhas (baixeiras).",
+    "metodo_controle": "Controle da Pinta-Preta:\n\n• Rotação de culturas (evitar solanáceas em sequência)\n• Eliminação de restos culturais\n• Evitar molhamento foliar prolongado\n• Aplicação preventiva de fungicidas protetores (como clorotalonil ou mancozebe) ou sistêmicos.",
+    "imagem": "../Imgs/doencas/Early_Blight.png"
+  },
+  "Huanglongbing": {
+    "nome": "Huanglongbing (HLB) / Greening dos Citros",
+    "descricao": "O HLB é a doença mais destrutiva da citricultura, causada por bactérias (*Candidatus Liberibacter spp.*). O sintoma mais característico é o **mosqueado assimétrico nas folhas** (manchas amarelas e verdes sem relação com as nervuras, ao contrário de deficiências nutricionais). Causa a maturação irregular dos frutos (ficam verdes na base e caem prematuramente), o declínio e, eventualmente, a morte da planta.",
+    "metodo_controle": "Controle do Greening:\n\n• Uso de mudas sadias e certificadas\n• Controle rigoroso do inseto vetor (psilídeo *Diaphorina citri*)\n• Erradicação imediata de plantas com sintomas\n\nNão há cura para plantas infectadas.",
+    "imagem": "../Imgs/doencas/Greening.png"
+  },
+  "Requeima": {
+    "nome": "Requeima",
+    "descricao": "A Requeima (causada por *Phytophthora infestans*) é uma doença devastadora para a batata e o tomate. Em condições de **alta umidade e temperaturas amenas**, causa manchas grandes, de aspecto encharcado ('oleoso') e coloração parda ou escura nas folhas. Na face inferior, pode-se observar um **mofo branco** (esporulação). Progride rapidamente, levando à necrose e apodrecimento de tubérculos e frutos.",
+    "metodo_controle": "Controle da Requeima:\n\n• Manejo rigoroso da irrigação (evitar molhamento foliar)\n• Uso de cultivares resistentes\n• Aplicação intensiva de fungicidas (protetores como clorotalonil e curativos/sistêmicos) em calendário apertado.",
+    "imagem": "../Imgs/doencas/Late_Blight.png"
+  },
+  "Mancha-Tardia": {
+    "nome": "Mancha-Tardia",
+    "descricao": "A Mancha-Tardia (ex: causada por *Cercosporidium personatum* ou *Passalora personata* no amendoim) é uma doença fúngica que, como o nome sugere, aparece mais tarde no ciclo da cultura. Causa manchas circulares e escuras, de cor marrom-escura a preta, geralmente mais visíveis na face inferior das folhas, podendo ter um halo amarelo discreto na face superior. Leva a uma intensa **desfolha precoce**, reduzindo a produtividade.",
+    "metodo_controle": "Controle da Mancha-Tardia:\n\n• Uso de cultivares resistentes ou tolerantes\n• Rotação de culturas para reduzir o inóculo no solo\n• Aplicação de fungicidas (como clorotalonil ou misturas de triazóis e estrobilurinas)\n• Monitoramento e uso de sistemas de previsão de doença.",
+    "imagem": "../Imgs/doencas/Late_Leaf_Spot.png"
+  },
+  "Mofo-Foliar": {
+    "nome": "Mofo-Foliar",
+    "descricao": "O Mofo-Foliar (causado por *Passalora fulva*, anteriormente *Cladosporium fulvum*) afeta principalmente o tomateiro, especialmente em cultivo protegido (estufas) com **alta umidade e pouca ventilação**. Os sintomas iniciais são manchas cloróticas (**amarelo-pálido**) na face superior das folhas. Na face inferior correspondente, desenvolve-se um **mofo de cor olivácea a acinzentada** que depois escurece.",
+    "metodo_controle": "Controle do Mofo-Foliar:\n\n• Ventilação adequada\n• Manejo da irrigação (evitar molhar as folhas)\n• Uso de cultivares resistentes\n• Aplicação de fungicidas (protetores ou sistêmicos) em alta pressão da doença.",
+    "imagem": "../Imgs/doencas/Leaf_Mold.png"
+  },
+  "Vírus do Mosaico": {
+    "nome": "Vírus do Mosaico",
+    "descricao": "O 'Vírus do Mosaico' é o **agente patogênico** (o microrganismo) que causa a 'Doença do Mosaico'. Exemplos incluem o Tobacco Mosaic Virus (TMV) ou o Cucumber Mosaic Virus (CMV). São parasitas obrigatórios que utilizam a maquinaria celular da planta para se replicar, sendo responsáveis pelos sintomas sistêmicos de mosaico, deformação e redução de produção.",
+    "metodo_controle": "Controle do Vírus do Mosaico:\n\n• Uso de material propagativo livre de vírus\n• Controle eficiente dos insetos vetores\n• Eliminação de plantas sintomáticas\n\nO foco é evitar infecção e disseminação.",
+    "imagem": "../Imgs/doencas/Mosaic_Virus.png"
+  },
+  "Mancha-Foliar-do-Milho": {
+    "nome": "Mancha-Foliar-do-Milho (Northern Leaf Blight)",
+    "descricao": "É uma importante doença fúngica do milho, causada por *Exserohilum turcicum*. Caracteriza-se por lesões grandes (podem chegar a 15 cm), de formato elíptico ou **'charuto'**, com coloração cinza ou parda. As lesões começam nas folhas inferiores e progridem para as superiores, reduzindo drasticamente a área foliar e, consequentemente, a produção de grãos.",
+    "metodo_controle": "Controle da Mancha-Foliar-do-Milho:\n\n• Uso de híbridos de milho com resistência genética\n• Rotação de culturas e plantio direto\n• Aplicação de fungicidas (estrobilurinas, triazóis) em híbridos suscetíveis sob alta pressão da doença.",
+    "imagem": "../Imgs/doencas/Northern_Leaf_Blight.png"
+  },
+  
+  "Podridão-Vermelha": {
+    "nome": "Podridão-Vermelha",
+    "descricao": "A Podridão-Vermelha (causada por *Colletotrichum falcatum*) é uma doença importante da cana-de-açúcar. O sintoma mais característico é **interno**: ao cortar o colmo longitudinalmente, observa-se uma **coloração vermelha intensa** no tecido, interrompida por 'ilhas' de tecido branco. Externamente, pode levar ao secamento das folhas e declínio da planta.",
+    "metodo_controle": "Controle da Podridão-Vermelha:\n\n• Uso de variedades resistentes\n• Plantio de mudas (toletes) sadias\n• Evitar ferimentos nos colmos.",
+    "imagem": "../Imgs/doencas/Red_Rot.png"
+  },
+  "Sarna": {
+    "nome": "Sarna (Escabiose)",
+    "descricao": "A Sarna (ex: *Venturia inaequalis* em macieira) é uma doença fúngica que causa lesões escuras, de aspecto aveludado ou 'sarnento' e cor olivácea a preta, nas folhas, ramos e **frutos**. As lesões nos frutos podem rachar e se tornar corticosas (com aspecto de cortiça), depreciando o valor comercial. É favorecida por períodos prolongados de molhamento foliar.",
+    "metodo_controle": "Controle da Sarna:\n\n• Remoção e trituração das folhas caídas no inverno\n• Podas de aeração\n• Aplicação rigorosa de fungicidas protetores e sistêmicos desde a brotação.",
+    "imagem": "../Imgs/doencas/Sarna.png"
+  },
+  "Mancha-de-Septória": {
+    "nome": "Mancha-de-Septória (Septoriose)",
+    "descricao": "A Septoriose (causada por *Septoria lycopersici* em tomate, por exemplo) caracteriza-se por numerosas manchas foliares **pequenas e circulares**. As manchas têm um **centro cinza ou pardo-claro** e bordas escuras. O sinal diagnóstico é a presença de minúsculos **pontos pretos** no centro da lesão (picnídios, estruturas de reprodução do fungo). Causa intensa desfolha, começando pelas folhas baixeiras.",
+    "metodo_controle": "Controle da Mancha-de-Septória:\n\n• Rotação de culturas\n• Eliminação de restos culturais\n• Evitar irrigação por aspersão\n• Aplicação preventiva de fungicidas protetores (clorotalonil, mancozebe, cúpricos).",
+    "imagem": "../Imgs/doencas/Septoria_Leaf_Spot.png"
+  },
+  "Mancha-Alvo": {
+    "nome": "Mancha-Alvo",
+    "descricao": "A Mancha-Alvo é causada pelo fungo *Corynespora cassiicola* e afeta diversas culturas, como a soja e o tomateiro. Produz lesões foliares necróticas, circulares, que apresentam **anéis concêntricos** bem visíveis (semelhante a um alvo, daí o nome). Em alta severidade, pode causar a desfolha precoce e grandes perdas de produtividade.",
+    "metodo_controle": "Controle da Mancha-Alvo:\n\n• Uso de cultivares resistentes ou tolerantes\n• Rotação de culturas (evitar plantio sucessivo da mesma espécie)\n• Aplicação preventiva de fungicidas (misturas de grupos químicos).",
+    "imagem": "../Imgs/doencas/Target_Spot.png"
+  }
+}

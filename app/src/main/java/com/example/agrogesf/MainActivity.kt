@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Book
+import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocationOn
@@ -39,6 +40,7 @@ import com.example.agrogesf.data.preferences.PreferencesManager
 import com.example.agrogesf.ui.components.BottomNavItem
 import com.example.agrogesf.ui.components.CustomBottomNavigation
 import com.example.agrogesf.ui.screens.AuthScreen
+import com.example.agrogesf.ui.screens.CameraScreen
 import com.example.agrogesf.ui.screens.GPSScreen
 import com.example.agrogesf.ui.screens.GlossaryScreen
 import com.example.agrogesf.ui.screens.HomeScreen
@@ -102,7 +104,9 @@ fun MainScreenWithNavigation() {
 
     val showBottomNav = when {
         currentRoute == null -> false
-        currentRoute.startsWith("pest_detail") -> false
+        currentRoute.startsWith("pest_detail_detection") -> false
+        currentRoute.startsWith("pest_detail_glossary") -> false
+        currentRoute == "camera" -> false  // ← ESCONDE bottom bar na câmera
         else -> true
     }
 
@@ -113,8 +117,9 @@ fun MainScreenWithNavigation() {
                 val selectedIndex = when (currentRoute) {
                     "home" -> 0
                     "glossary_pragues", "glossary_diseases" -> 1
-                    "gps" -> 2
-                    "settings" -> 3
+                    "camera" -> 2  // ← ADICIONE
+                    "gps" -> 3     // ← AJUSTE (era 2, agora é 3)
+                    "settings" -> 4 // ← AJUSTE (era 3, agora é 4)
                     else -> 0
                 }
 
@@ -130,11 +135,15 @@ fun MainScreenWithNavigation() {
                                 popUpTo("home") { inclusive = false }
                                 launchSingleTop = true
                             }
-                            2 -> navController.navigate("gps") {
+                            2 -> navController.navigate("camera") {  // ← ADICIONE
                                 popUpTo("home") { inclusive = false }
                                 launchSingleTop = true
                             }
-                            3 -> navController.navigate("settings") {
+                            3 -> navController.navigate("gps") {  // ← AJUSTE
+                                popUpTo("home") { inclusive = false }
+                                launchSingleTop = true
+                            }
+                            4 -> navController.navigate("settings") {  // ← AJUSTE
                                 popUpTo("home") { inclusive = false }
                                 launchSingleTop = true
                             }
@@ -143,6 +152,7 @@ fun MainScreenWithNavigation() {
                     items = listOf(
                         BottomNavItem(Icons.Default.Home, "home"),
                         BottomNavItem(Icons.Default.Book, "glossary"),
+                        BottomNavItem(Icons.Default.CameraAlt, "camera"),  // ← ADICIONE
                         BottomNavItem(Icons.Default.LocationOn, "gps"),
                         BottomNavItem(Icons.Default.Info, "settings")
                     )
@@ -155,19 +165,21 @@ fun MainScreenWithNavigation() {
             startDestination = "home",
             modifier = Modifier.padding(paddingValues)
         ) {
+            // ===== HOME (Detecções do Raspberry) =====
             composable("home") {
                 HomeScreen(
                     onPestClick = { pestId ->
-                        navController.navigate("pest_detail/$pestId")
+                        navController.navigate("pest_detail_detection/$pestId")
                     }
                 )
             }
 
+            // ===== GLOSSÁRIO - PRAGAS =====
             composable("glossary_pragues") {
                 GlossaryScreen(
                     pestType = PestType.PRAGA,
                     onPestClick = { pestId ->
-                        navController.navigate("pest_detail/$pestId")
+                        navController.navigate("pest_detail_glossary/$pestId")
                     },
                     onNavigateToOtherType = {
                         navController.navigate("glossary_diseases") {
@@ -177,11 +189,12 @@ fun MainScreenWithNavigation() {
                 )
             }
 
+            // ===== GLOSSÁRIO - DOENÇAS =====
             composable("glossary_diseases") {
                 GlossaryScreen(
                     pestType = PestType.DOENCA,
                     onPestClick = { pestId ->
-                        navController.navigate("pest_detail/$pestId")
+                        navController.navigate("pest_detail_glossary/$pestId")
                     },
                     onNavigateToOtherType = {
                         navController.navigate("glossary_pragues") {
@@ -191,13 +204,35 @@ fun MainScreenWithNavigation() {
                 )
             }
 
+            // ===== CÂMERA - IDENTIFICAÇÃO COM IA ===== ← ADICIONE ISTO
+            composable("camera") {
+                CameraScreen(
+                    onBackPress = { navController.popBackStack() }
+                )
+            }
+
+            // ===== DETALHE DA PRAGA - VINDO DA HOME (COM BOTÕES) =====
             composable(
-                route = "pest_detail/{pestId}",
+                route = "pest_detail_detection/{pestId}",
                 arguments = listOf(navArgument("pestId") { type = NavType.StringType })
             ) { backStackEntry ->
                 val pestId = backStackEntry.arguments?.getString("pestId") ?: return@composable
                 PestDetailScreen(
                     pestId = pestId,
+                    isFromGlossary = false,
+                    onBackPress = { navController.popBackStack() }
+                )
+            }
+
+            // ===== DETALHE DA PRAGA - VINDO DO GLOSSÁRIO (SEM BOTÕES) =====
+            composable(
+                route = "pest_detail_glossary/{pestId}",
+                arguments = listOf(navArgument("pestId") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val pestId = backStackEntry.arguments?.getString("pestId") ?: return@composable
+                PestDetailScreen(
+                    pestId = pestId,
+                    isFromGlossary = true,
                     onBackPress = { navController.popBackStack() }
                 )
             }

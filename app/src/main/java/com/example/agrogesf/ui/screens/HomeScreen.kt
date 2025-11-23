@@ -26,11 +26,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import com.example.agrogesf.data.models.Pest
 import com.example.agrogesf.data.models.TransferStatus
 import com.example.agrogesf.ui.theme.*
 import com.example.agrogesf.R
+import com.example.agrogesf.data.models.PestType
 import com.example.agrogesf.ui.viewmodels.HomeViewModel
 import java.io.File
 
@@ -176,11 +178,7 @@ fun HomeScreen(
                         .padding(16.dp),
                     containerColor = GreenPrimary
                 ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_wifi),
-                        contentDescription = "Transferir dados",
-                        tint = Color.White
-                    )
+
                 }
             }
         }
@@ -283,121 +281,113 @@ fun HomeScreen(
 
 
     @Composable
-    fun EmptyStateCard() {
+    fun PestCard(
+        name: String,
+        description: String,
+        id: String,
+        imageRes: Int,
+        onPestClick: (String) -> Unit
+    ) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(400.dp)
-                .shadow(8.dp, RoundedCornerShape(24.dp)),
-            shape = RoundedCornerShape(24.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White)
+                .height(160.dp)
+                .clickable { onPestClick(id) },
+            shape = RoundedCornerShape(20.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFFFDFCEF)), // fundo amarelo clarinho bonito
+            elevation = CardDefaults.cardElevation(8.dp)
         ) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(12.dp)
             ) {
+
+                // --- IMAGEM ---
+                Image(
+                    painter = painterResource(id = imageRes),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(120.dp)
+                        .clip(RoundedCornerShape(16.dp)),
+                    contentScale = ContentScale.Crop
+                )
+
+                Spacer(modifier = Modifier.width(14.dp))
+
+                // --- TEXTOS ---
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.padding(32.dp)
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(vertical = 6.dp),
+                    verticalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_wifi_off),
-                        contentDescription = null,
-                        modifier = Modifier.size(80.dp),
-                        tint = GreenPrimary.copy(alpha = 0.5f)
-                    )
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
                     Text(
-                        text = "Nenhum dado carregado",
-                        fontSize = 20.sp,
+                        text = name,
+                        fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
-                        color = TextPrimary
+                        color = Color(0xFF065F46) // verde escuro bonito
                     )
 
-                    Spacer(modifier = Modifier.height(8.dp))
-
                     Text(
-                        text = "Conecte-se ao WiFi AGRO_GESF_DATA para receber informações sobre pragas e doenças",
+                        text = description,
                         fontSize = 14.sp,
-                        color = TextSecondary,
-                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                        color = Color(0xFF4B5563), // cinza elegante
+                        maxLines = 2
+                    )
+
+                    // Barrinha colorida de rodapé
+                    Box(
+                        modifier = Modifier
+                            .height(6.dp)
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(Color(0xFFFFC727)) // amarelo
                     )
                 }
             }
         }
     }
+
+
+
+
+    @Composable
+    fun GeneratedPestCards(onPestClick: (String) -> Unit){
+        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+
+            PestCard(
+                name = "Early Blight",
+                description = "Detectado com 34.6% de confiança.",
+                id = "pest_8693174198489379680",
+                imageRes = R.drawable.early_blight,    // <-- sua imagem aqui
+                onPestClick = onPestClick
+            )
+
+            PestCard(
+                name = "Septoria Leaf Spot",
+                description = "Alternativa 1: 22.9% de confiança.",
+                id = "pest_6954827294297058587",
+                imageRes = R.drawable.septoria_leaf_spot,        // <-- sua imagem aqui
+                onPestClick = onPestClick
+            )
+
+            PestCard(
+                name = "Target Spot",
+                description = "Alternativa 2: 19.7% de confiança.",
+                id = "pest_1804495173477635113",
+                imageRes = R.drawable.target_spot,     // <-- sua imagem aqui
+                onPestClick = onPestClick
+            )
+        }}
+
+
 
     Spacer(modifier = Modifier.height(16.dp))
+    GeneratedPestCards(onPestClick)
 
-    // Carrossel de pragas com ViewPager
-    if (pragues.isNotEmpty()) {
-        val pagerState = rememberPagerState(pageCount = { pragues.size })
+    GeneratedPestCards(onPestClick)
+    GeneratedPestCards(onPestClick)
 
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(480.dp)
-                .shadow(8.dp, RoundedCornerShape(24.dp)),
-            shape = RoundedCornerShape(24.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White)
-        ) {
-            Column(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                // ViewPager para as imagens
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                ) {
-                    HorizontalPager(
-                        state = pagerState,
-                        modifier = Modifier.fillMaxSize()
-                    ) { page ->
-                        val pest = pragues[page]
-                        PestImageCard(
-                            pest = pest,
-                            onPestClick = { onPestClick(pest.id) }
-                        )
-                    }
-
-                    // Indicadores de página
-                    Row(
-                        Modifier
-                            .align(Alignment.BottomCenter)
-                            .padding(16.dp),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        repeat(pragues.size) { iteration ->
-                            val color = if (pagerState.currentPage == iteration)
-                                YellowAccent
-                            else
-                                Color.White.copy(alpha = 0.5f)
-
-                            Box(
-                                modifier = Modifier
-                                    .padding(4.dp)
-                                    .clip(CircleShape)
-                                    .background(color)
-                                    .size(if (pagerState.currentPage == iteration) 12.dp else 8.dp)
-                                    .animateContentSize()
-                            )
-                        }
-                    }
-                }
-
-                // Informações da praga atual
-                val currentPest = pragues[pagerState.currentPage]
-                PestInfoSection(
-                    pest = currentPest,
-                    onMoreClick = { onPestClick(currentPest.id) }
-                )
-            }
-        }
-    } else {
-        // Estado vazio
-        EmptyStateCard()
-    }
 }

@@ -1,0 +1,20 @@
+{
+"Aphids": {
+    "nome": "Afídeos (Pulgões)",
+    "descricao": "São pequenos insetos sugadores de seiva, de corpo mole e formato piriforme. Vivem em colônias, geralmente em brotos e folhas jovens, enfraquecendo a planta e causando deformações. São notórios por transmitirem **viroses** e por excretarem o 'honeydew', um líquido açucarado que favorece o desenvolvimento da **fumagina** (fungo escuro).",
+    "metodo_controle": "O controle pode ser realizado através de: \n• **Controle biológico**: preservação de inimigos naturais como joaninhas e crisopídeos.\n• **Aplicações de óleos**: uso de óleo de neem ou sabão inseticida (solução de água e sabão neutro) para sufocar os insetos.\n• **Uso de aficidas**: em casos de infestações mais severas, pode ser necessário o uso de inseticidas químicos específicos, sempre com rotação de ingredientes ativos para evitar resistência.",
+    "imagem": "../Imgs/pragas/Aphids.png"
+  },
+  "Spider Mites": {
+    "nome": "Ácaros-Rajados (Spider Mites)",
+    "descricao": "São aracnídeos minúsculos (*Tetranychus urticae*), não insetos, com cerca de 0,5 mm. Vivem principalmente na face inferior das folhas, sugando o conteúdo celular. Os sintomas iniciais são pequenos pontos amarelados ou esbranquiçados. Em infestações altas (favorecidas por calor e seca), as folhas ficam 'bronzeadas', secam e há formação de **teias finas**.",
+    "metodo_controle": "O controle ideal é **integrado**:\n• **Manejo Cultural**: Evitar o estresse hídrico das plantas e a poeira, que favorecem a praga.\n• **Controle Biológico**: Preservação e liberação de ácaros predadores (*Phytoseiulus* spp.).\n• **Controle Químico**: Aplicação de **acaricidas** específicos, pois inseticidas comuns podem piorar o problema ao eliminar inimigos naturais. Produtos como enxofre e óleo de neem também são utilizados.",
+    "imagem": "../Imgs/pragas/Spider_Mites.png"
+  },
+  "pragas_diversas": {
+    "nome": "Pragas Diversas",
+    "descricao": "Categoria genérica para diversos **artrópodes** (insetos, ácaros ou nematoides) que causam danos econômicos às culturas e que não são especificamente listados. Inclui uma variedade de lagartas (mastigadores), percevejos (sugadores), besouros, tripes e moscas. Os danos podem ser **diretos** (consumo de folhas/frutos) ou **indiretos** (transmissão de doenças).",
+    "metodo_controle": "O manejo ideal é o **MIP** (Manejo Integrado de Pragas):\n• **Monitoramento**: constante (pano-de-batida, armadilhas) para determinar o nível de infestação.\n• **Controle Biológico**: preservação de inimigos naturais e liberação de agentes de controle.\n• **Controle Cultural**: rotação de culturas, época de plantio e uso de barreiras.\n• **Controle Químico**: uso de inseticidas seletivos, apenas quando o nível de dano econômico for atingido, priorizando a rotação de ingredientes ativos.",
+    "imagem": "../Imgs/pragas/pragas_diversas.png"
+  }
+}
