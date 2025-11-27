@@ -32,7 +32,7 @@ import java.util.*
     val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
     val date = Date(detection.detectedAt)
 
-    val confidencePercentage = (detection.confidence * 100).toInt()
+    val confidencePercentage = String.format(Locale("pt", "BR"), "%.2f", detection.confidence)
 
     // Cor baseada no tipo
     val cardColor = if (detection.pestType == "PRAGA") {
@@ -165,12 +165,10 @@ import java.util.*
     }
 }
 
-// Função auxiliar para cor baseada na confiança
 private fun getConfidenceColor(confidence: Float): Color {
     return when {
-        confidence >= 0.8f -> Color(0xFF4CAF50) // Verde - Alta confiança
-        confidence >= 0.6f -> Color(0xFFFFA726) // Laranja - Média confiança
-        else -> Color(0xFFEF5350) // Vermelho - Baixa confiança
+        confidence >= 80f -> Color(0xFF4CAF50) // Verde - Alta confiança (80%+)
+        confidence >= 55f -> Color(0xFFFFA726) // Laranja - Média confiança (60-80%)
+        else -> Color(0xFFEF5350) // Vermelho - Baixa confiança (<60%)
     }
 }
-
