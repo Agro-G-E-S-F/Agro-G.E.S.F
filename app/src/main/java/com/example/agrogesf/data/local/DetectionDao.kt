@@ -20,4 +20,10 @@ interface DetectionDao {
 
     @Query("SELECT COUNT(*) FROM detections WHERE pestId = :pestId")
     suspend fun getDetectionCountForPest(pestId: String): Int
+    @Query("SELECT * FROM detections ORDER BY detectedAt DESC")
+    fun getAllDetections(): Flow<List<Detection>>
+
+    // ⭐ NOVO: Buscar por tipo
+    @Query("SELECT * FROM detections WHERE pestType = :type ORDER BY detectedAt DESC")
+    fun getDetectionsByType(type: String): Flow<List<Detection>>
 }

@@ -22,6 +22,7 @@ class AgroRepository(context: Context) {
     private val detectionDao = database.detectionDao()
     private val firestore: FirebaseFirestore = Firebase.firestore
     private val appContext = context.applicationContext
+    private val raspberryDetectionDao = database.raspberryDetectionDao()
 
     init {
         loadInitialDataIfNeeded()
@@ -123,7 +124,37 @@ class AgroRepository(context: Context) {
     fun getDetectionsByUser(userId: Long): Flow<List<Detection>> {
         return detectionDao.getDetectionsByUser(userId)
     }
+    suspend fun saveRaspberryDetection(detection: RaspberryDetection): Long {
+        return raspberryDetectionDao.insert(detection)
+    }
 
+    suspend fun saveRaspberryDetections(detections: List<RaspberryDetection>) {
+        raspberryDetectionDao.insertAll(detections)
+    }
+
+    fun getAllRaspberryDetections(): Flow<List<RaspberryDetection>> {
+        return raspberryDetectionDao.getAllDetections()
+    }
+
+    fun getRaspberryDetectionsByType(type: String): Flow<List<RaspberryDetection>> {
+        return raspberryDetectionDao.getDetectionsByType(type)
+    }
+
+    suspend fun getRaspberryDetectionById(id: Long): RaspberryDetection? {
+        return raspberryDetectionDao.getDetectionById(id)
+    }
+
+    suspend fun deleteRaspberryDetection(detection: RaspberryDetection) {
+        raspberryDetectionDao.delete(detection)
+    }
+
+    suspend fun clearAllRaspberryDetections() {
+        raspberryDetectionDao.deleteAll()
+    }
+
+    suspend fun getRaspberryDetectionsCount(): Int {
+        return raspberryDetectionDao.getCount()
+    }
     // Firebase sync operations
     suspend fun syncDataToFirebase(): Result<Unit> {
         return try {

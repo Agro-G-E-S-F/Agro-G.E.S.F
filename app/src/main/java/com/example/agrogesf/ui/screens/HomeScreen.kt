@@ -12,6 +12,15 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Cancel
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Stop
+import androidx.compose.material.icons.filled.Wifi
+import androidx.compose.material.icons.filled.WifiOff
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -20,21 +29,24 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import com.example.agrogesf.data.models.Pest
 import com.example.agrogesf.data.models.TransferStatus
 import com.example.agrogesf.ui.theme.*
 import com.example.agrogesf.R
-import com.example.agrogesf.data.models.PestType
+import com.example.agrogesf.data.repository.AgroRepository
+import com.example.agrogesf.network.WifiDataTransferManager
 import com.example.agrogesf.ui.viewmodels.HomeViewModel
+import kotlinx.coroutines.launch
 import java.io.File
+import com.example.agrogesf.ui.components.RaspberryDetectionCard
 
 
 @Composable
@@ -79,7 +91,7 @@ fun TransferStatusCard(
                     }
                     is TransferStatus.Transferring -> {
                         Text(
-                            text = status.current,
+                            text = status.message,
                             color = Color.White,
                             fontWeight = FontWeight.Bold,
                             fontSize = 14.sp
@@ -105,7 +117,7 @@ fun TransferStatusCard(
                             fontWeight = FontWeight.Bold
                         )
                         Text(
-                            text = "${status.itemsReceived} itens recebidos",
+                            text = "${status.itemCount} itens recebidos",
                             color = Color.White,
                             fontSize = 12.sp
                         )
@@ -144,9 +156,17 @@ fun HomeScreen(
     onPestClick: (String) -> Unit,
     viewModel: HomeViewModel = viewModel()
 ) {
+    val context = LocalContext.current
+    val repository = remember { AgroRepository(context) }
     val pragues by viewModel.pragues.collectAsState()
     val transferStatus by viewModel.transferStatus.collectAsState()
     val isConnectedToDataWifi by viewModel.isConnectedToDataWifi.collectAsState()
+    val wifiManager = remember { WifiDataTransferManager(context, repository) }
+    val isConnected by wifiManager.isConnectedToDataWifi.collectAsState()
+    val isRunning by wifiManager.isScriptRunning.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
+    val raspberryDetections by repository.getAllRaspberryDetections().collectAsState(initial = emptyList())
+
 
     Box(
         modifier = Modifier
@@ -158,17 +178,69 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            // Status de transferência
-            AnimatedVisibility(
-                visible = transferStatus !is TransferStatus.Idle,
-                enter = expandVertically() + fadeIn(),
-                exit = shrinkVertically() + fadeOut()
-            ) {
-                TransferStatusCard(
-                    status = transferStatus,
-                    onDismiss = { viewModel.resetTransferStatus() }
+            if (isConnected) {
+                Button(
+                    onClick = {
+                        coroutineScope.launch {
+                            wifiManager.fetchRaspberryDetections()
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp)
+                ) {
+                    Text("Buscar Detecções do Raspberry Pi")
+                }
+                when (transferStatus) {
+                    is TransferStatus.Transferring -> {
+                        val status = transferStatus as TransferStatus.Transferring
+                        LinearProgressIndicator(
+                            progress = status.progress / 100f,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 8.dp)
+                        )
+                        Text(status.message, fontSize = 12.sp)
+                    }
+                    is TransferStatus.Success -> {
+                        val count = (transferStatus as TransferStatus.Success).itemCount
+                        Text("✓ $count detecções baixadas!", color = Color.Green)
+                    }
+                    is TransferStatus.Error -> {
+                        val error = (transferStatus as TransferStatus.Error).message
+                        Text("✗ Erro: $error", color = Color.Red)
+                    }
+                    else -> {}
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+            if (raspberryDetections.isNotEmpty()) {
+            Text(
+                text = "Detecções Recentes (${raspberryDetections.size})",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF2C3E50),
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+
+            raspberryDetections.forEach { detection ->
+                RaspberryDetectionCard(
+                    detection = detection,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    onClick = {
+                        // Navegar para detalhes
+                    }
                 )
             }
+        } else {
+            Text(
+                text = "Nenhuma detecção ainda. Conecte ao WiFi e busque as detecções.",
+                color = Color.Gray,
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+
 
             // Indicador de WiFi conectado
             if (isConnectedToDataWifi) {
@@ -181,6 +253,8 @@ fun HomeScreen(
 
                 }
             }
+            RemoteControlCard(wifiManager = wifiManager)
+
         }
     }
 
@@ -353,41 +427,312 @@ fun HomeScreen(
 
 
 
-    @Composable
-    fun GeneratedPestCards(onPestClick: (String) -> Unit){
-        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-
-            PestCard(
-                name = "Early Blight",
-                description = "Detectado com 34.6% de confiança.",
-                id = "pest_8693174198489379680",
-                imageRes = R.drawable.early_blight,    // <-- sua imagem aqui
-                onPestClick = onPestClick
-            )
-
-            PestCard(
-                name = "Septoria Leaf Spot",
-                description = "Alternativa 1: 22.9% de confiança.",
-                id = "pest_6954827294297058587",
-                imageRes = R.drawable.septoria_leaf_spot,        // <-- sua imagem aqui
-                onPestClick = onPestClick
-            )
-
-            PestCard(
-                name = "Target Spot",
-                description = "Alternativa 2: 19.7% de confiança.",
-                id = "pest_1804495173477635113",
-                imageRes = R.drawable.target_spot,     // <-- sua imagem aqui
-                onPestClick = onPestClick
-            )
-        }}
-
-
-
     Spacer(modifier = Modifier.height(16.dp))
-    GeneratedPestCards(onPestClick)
 
-    GeneratedPestCards(onPestClick)
-    GeneratedPestCards(onPestClick)
 
+}
+
+@Composable
+fun RemoteControlCard(
+    wifiManager: WifiDataTransferManager,
+    modifier: Modifier = Modifier
+) {
+    val isConnected by wifiManager.isConnectedToDataWifi.collectAsState()
+    val isRunning by wifiManager.isScriptRunning.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
+
+    var isLoading by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
+    var showSuccess by remember { mutableStateOf(false) }
+
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+            .shadow(8.dp, RoundedCornerShape(20.dp)),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = if (isConnected) {
+                if (isRunning) Color(0xFF4CAF50) else Color(0xFFFF9800)
+            } else {
+                Color(0xFFE0E0E0)
+            }
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // Header com ícone e título
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column {
+                    Text(
+                        text = "Controle Remoto",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = if (isConnected) Color.White else Color.Gray
+                    )
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        // Indicador de conexão piscando
+                        if (isConnected && isRunning) {
+                            PulsingDot()
+                            Spacer(modifier = Modifier.width(8.dp))
+                        }
+
+                        Text(
+                            text = when {
+                                !isConnected -> "Desconectado"
+                                isRunning -> "Executando"
+                                else -> "Conectado (Parado)"
+                            },
+                            fontSize = 14.sp,
+                            color = if (isConnected) Color.White.copy(alpha = 0.9f) else Color.Gray
+                        )
+                    }
+                }
+
+                // Ícone de status
+                Icon(
+                    imageVector = when {
+                        !isConnected -> Icons.Default.WifiOff
+                        isRunning -> Icons.Default.CheckCircle
+                        else -> Icons.Default.Cancel
+                    },
+                    contentDescription = null,
+                    modifier = Modifier.size(40.dp),
+                    tint = if (isConnected) Color.White else Color.Gray
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Status detalhado
+            StatusBar(isConnected = isConnected, isRunning = isRunning)
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Botão de controle
+            Button(
+                onClick = {
+                    coroutineScope.launch {
+                        isLoading = true
+                        errorMessage = null
+                        showSuccess = false
+
+                        val result = wifiManager.toggleScript()
+
+                        result.onSuccess {
+                            showSuccess = true
+                            // Esconde a mensagem de sucesso após 2 segundos
+                            kotlinx.coroutines.delay(2000)
+                            showSuccess = false
+                        }
+
+                        result.onFailure { error ->
+                            errorMessage = error.message
+                        }
+
+                        isLoading = false
+                    }
+                },
+                enabled = isConnected && !isLoading,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (isRunning) Color(0xFFD32F2F) else Color(0xFF2196F3),
+                    disabledContainerColor = Color.Gray
+                ),
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                if (isLoading) {
+                    CircularProgressIndicator(
+                        color = Color.White,
+                        modifier = Modifier.size(24.dp),
+                        strokeWidth = 2.dp
+                    )
+                } else {
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = if (isRunning) Icons.Default.Stop else Icons.Default.PlayArrow,
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp)
+                        )
+
+                        Spacer(modifier = Modifier.width(8.dp))
+
+                        Text(
+                            text = if (isRunning) "PARAR SCRIPT" else "INICIAR SCRIPT",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+            }
+
+            // Mensagens de feedback
+            AnimatedVisibility(visible = showSuccess) {
+                Spacer(modifier = Modifier.height(12.dp))
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color(0xFF4CAF50).copy(alpha = 0.2f)
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.CheckCircle,
+                            contentDescription = null,
+                            tint = Color(0xFF2E7D32),
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Comando enviado com sucesso!",
+                            color = Color(0xFF2E7D32),
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+                }
+            }
+
+            errorMessage?.let { error ->
+                Spacer(modifier = Modifier.height(12.dp))
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color(0xFFFFCDD2)
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Error,
+                            contentDescription = null,
+                            tint = Color(0xFFC62828),
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Erro: $error",
+                            color = Color(0xFFC62828),
+                            fontSize = 12.sp
+                        )
+                    }
+                }
+            }
+
+            // Mensagem de ajuda quando desconectado
+            if (!isConnected) {
+                Spacer(modifier = Modifier.height(12.dp))
+                Text(
+                    text = "Conecte-se ao WiFi AGRO_GESF_DATA para controlar o script",
+                    fontSize = 12.sp,
+                    color = Color.Gray,
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun StatusBar(isConnected: Boolean, isRunning: Boolean) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        StatusItem(
+            icon = Icons.Default.Wifi,
+            label = "Conexão",
+            value = if (isConnected) "OK" else "OFF",
+            color = if (isConnected) Color.White else Color.Gray
+        )
+
+        Divider(
+            modifier = Modifier
+                .height(40.dp)
+                .width(1.dp),
+            color = if (isConnected) Color.White.copy(alpha = 0.3f) else Color.Gray.copy(alpha = 0.3f)
+        )
+
+        StatusItem(
+            icon = if (isRunning) Icons.Default.PlayArrow else Icons.Default.Stop,
+            label = "Status",
+            value = if (isRunning) "Rodando" else "Parado",
+            color = if (isConnected) Color.White else Color.Gray
+        )
+    }
+}
+
+@Composable
+private fun StatusItem(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    label: String,
+    value: String,
+    color: Color
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = color,
+            modifier = Modifier.size(24.dp)
+        )
+
+        Spacer(modifier = Modifier.height(4.dp))
+
+        Text(
+            text = label,
+            fontSize = 10.sp,
+            color = color.copy(alpha = 0.7f)
+        )
+
+        Text(
+            text = value,
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold,
+            color = color
+        )
+    }
+}
+
+@Composable
+private fun PulsingDot() {
+    val infiniteTransition = rememberInfiniteTransition(label = "pulsing")
+    val alpha by infiniteTransition.animateFloat(
+        initialValue = 0.3f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(800, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "alpha"
+    )
+
+    Box(
+        modifier = Modifier
+            .size(10.dp)
+            .background(Color.White.copy(alpha = alpha), CircleShape)
+    )
 }

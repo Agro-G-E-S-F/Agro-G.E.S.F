@@ -2,23 +2,22 @@ package com.example.agrogesf.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.example.agrogesf.data.converters.StringListConverter
+
+enum class PestType {
+    PRAGA,
+    DOENCA
+}
 
 @Entity(tableName = "pests")
-@TypeConverters(StringListConverter::class)
 data class Pest(
     @PrimaryKey
     val id: String,
     val name: String,
+    val scientificName: String = "",
     val description: String,
-    val images: List<String>, // Lista de caminhos de imagens locais
+    val controlMethod: String = "",
+    val images: List<String> = emptyList(),
     val type: PestType,
     val detectedCount: Int = 0,
-    val lastUpdated: Long = System.currentTimeMillis()
+    val syncedToFirebase: Boolean = false
 )
-
-enum class PestType {
-    PRAGA, // Pest
-    DOENCA // Disease
-}
